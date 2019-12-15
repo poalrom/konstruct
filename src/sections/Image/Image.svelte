@@ -7,7 +7,7 @@
   $: imagePath = prepareImage(block.img);
 </script>
 
-<div class="Image">
+<div class="Image" data-id={block.id}>
 
   {#if block.title}
     <h2 class="Image-Title">

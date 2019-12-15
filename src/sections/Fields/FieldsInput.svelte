@@ -12,7 +12,7 @@
   }
 </script>
 
-<div class="Fields-Input">
+<div class="Fields-Input" data-id={field.id}>
   {#if field.title}
     <label for="name" class="Fields-InputLabel">
       {@html template(field.title)}

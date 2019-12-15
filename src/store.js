@@ -17,8 +17,7 @@ export function initStore(config, onUpdate) {
         if (block.type === 'fields') {
             block.fields.forEach((field) => {
                 const id = block.id + '.' + field.id;
-                console.log(id);
-                acc[id] = writable(block.attributes && block.attributes.value || '');
+                acc[id] = writable(field.attributes && field.attributes.value || '');
                 acc[id].subscribe(onUpdate);
                 if (config.debug && config.debug.logUpdates) {
                     acc[id].subscribe((value) => console.log(id + ': ' + value));

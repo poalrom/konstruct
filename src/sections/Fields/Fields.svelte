@@ -5,7 +5,7 @@
   export let block;
 </script>
 
-<div class="Fields">
+<div class="Fields" data-id={block.id}>
   {#if block.title}
     <h2 class="Fields-Title">
       {@html block.title}

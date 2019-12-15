@@ -489,8 +489,7 @@
             if (block.type === 'fields') {
                 block.fields.forEach((field) => {
                     const id = block.id + '.' + field.id;
-                    console.log(id);
-                    acc[id] = writable(block.attributes && block.attributes.value || '');
+                    acc[id] = writable(field.attributes && field.attributes.value || '');
                     acc[id].subscribe(onUpdate);
                     if (config.debug && config.debug.logUpdates) {
                         acc[id].subscribe((value) => console.log(id + ': ' + value));
@@ -1117,7 +1116,7 @@
     			label = element("label");
     			attr_dev(label, "for", "name");
     			attr_dev(label, "class", "Fields-InputLabel");
-    			add_location(label, file$2, 16, 4, 372);
+    			add_location(label, file$2, 16, 4, 391);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, label, anchor);
@@ -1145,6 +1144,7 @@
     	let div;
     	let t;
     	let input;
+    	let div_data_id_value;
     	let dispose;
     	let if_block = /*field*/ ctx[0].title && create_if_block$1(ctx);
 
@@ -1168,8 +1168,9 @@
     			t = space();
     			input = element("input");
     			set_attributes(input, input_data);
-    			add_location(input, file$2, 21, 2, 477);
+    			add_location(input, file$2, 21, 2, 496);
     			attr_dev(div, "class", "Fields-Input");
+    			attr_dev(div, "data-id", div_data_id_value = /*field*/ ctx[0].id);
     			add_location(div, file$2, 14, 0, 321);
     			dispose = listen_dev(input, "input", /*handleInput*/ ctx[3], false, false, false);
     		},
@@ -1202,6 +1203,10 @@
     				dirty & /*name*/ 4 && ({ name: /*name*/ ctx[2] }),
     				dirty & /*$value*/ 2 && ({ value: /*$value*/ ctx[1] })
     			]));
+
+    			if (dirty & /*field*/ 1 && div_data_id_value !== (div_data_id_value = /*field*/ ctx[0].id)) {
+    				attr_dev(div, "data-id", div_data_id_value);
+    			}
     		},
     		i: noop,
     		o: noop,
@@ -1318,7 +1323,7 @@
     		c: function create() {
     			h2 = element("h2");
     			attr_dev(h2, "class", "Fields-Title");
-    			add_location(h2, file$3, 9, 4, 189);
+    			add_location(h2, file$3, 9, 4, 208);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -1351,7 +1356,7 @@
     		c: function create() {
     			p = element("p");
     			attr_dev(p, "class", "Fields-Description");
-    			add_location(p, file$3, 15, 4, 290);
+    			add_location(p, file$3, 15, 4, 309);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1430,6 +1435,7 @@
     	let div;
     	let t0;
     	let t1;
+    	let div_data_id_value;
     	let current;
     	let if_block0 = /*block*/ ctx[0].title && create_if_block_1$1(ctx);
     	let if_block1 = /*block*/ ctx[0].description && create_if_block$2(ctx);
@@ -1457,6 +1463,7 @@
     			}
 
     			attr_dev(div, "class", "Fields");
+    			attr_dev(div, "data-id", div_data_id_value = /*block*/ ctx[0].id);
     			add_location(div, file$3, 7, 0, 144);
     		},
     		l: function claim(nodes) {
@@ -1527,6 +1534,10 @@
     				}
 
     				check_outros();
+    			}
+
+    			if (!current || dirty & /*block*/ 1 && div_data_id_value !== (div_data_id_value = /*block*/ ctx[0].id)) {
+    				attr_dev(div, "data-id", div_data_id_value);
     			}
     		},
     		i: function intro(local) {
@@ -1630,7 +1641,7 @@
     		c: function create() {
     			h2 = element("h2");
     			attr_dev(h2, "class", "Image-Title");
-    			add_location(h2, file$4, 12, 4, 239);
+    			add_location(h2, file$4, 12, 4, 258);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -1663,7 +1674,7 @@
     		c: function create() {
     			p = element("p");
     			attr_dev(p, "class", "Image-Description");
-    			add_location(p, file$4, 18, 4, 339);
+    			add_location(p, file$4, 18, 4, 358);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1692,6 +1703,7 @@
     	let t0;
     	let t1;
     	let img;
+    	let div_data_id_value;
     	let if_block0 = /*block*/ ctx[0].title && create_if_block_1$2(ctx);
     	let if_block1 = /*block*/ ctx[0].description && create_if_block$3(ctx);
 
@@ -1719,8 +1731,9 @@
     			t1 = space();
     			img = element("img");
     			set_attributes(img, img_data);
-    			add_location(img, file$4, 23, 2, 431);
+    			add_location(img, file$4, 23, 2, 450);
     			attr_dev(div, "class", "Image");
+    			attr_dev(div, "data-id", div_data_id_value = /*block*/ ctx[0].id);
     			add_location(div, file$4, 9, 0, 194);
     		},
     		l: function claim(nodes) {
@@ -1769,6 +1782,10 @@
     				}),
     				dirty & /*block*/ 1 && /*block*/ ctx[0].attributes
     			]));
+
+    			if (dirty & /*block*/ 1 && div_data_id_value !== (div_data_id_value = /*block*/ ctx[0].id)) {
+    				attr_dev(div, "data-id", div_data_id_value);
+    			}
     		},
     		i: noop,
     		o: noop,
