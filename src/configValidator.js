@@ -1,4 +1,4 @@
-const expectedBlocks = ['fields', 'select'];
+const expectedBlocks = ['fields', 'select', 'image'];
 
 export function configValidator(config) {
     config.blocks.forEach(validateBlock);

@@ -3,6 +3,7 @@
   import { initStore, store } from "./store";
   import Select from "./sections/Select/Select.svelte";
   import Fields from "./sections/Fields/Fields.svelte";
+  import Image from "./sections/Image/Image.svelte";
 
   export let config;
 
@@ -50,6 +51,9 @@
     {/if}
     {#if block.type === 'fields'}
       <Fields {block} />
+    {/if}
+    {#if block.type === 'image'}
+      <Image {block} />
     {/if}
   {/each}
 

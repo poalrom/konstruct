@@ -13,13 +13,12 @@
 
 	<script>
 		const konstructConfig = {
-			onSubmit: console.log,
 			action: '/send',
 			saveButtonText: 'Save',
 			blocks: [{
 				id: 'type',
 				type: 'select',
-				title: 'Выберите <a href="https://www.google.ru/search?q=тип">тип</a>',
+				title: 'Выберите тип',
 				description: 'Lorem ipsum dolor sit amet.',
 				values: [{
 					value: 'al',
@@ -45,7 +44,7 @@
 				description: 'Lorem ipsum dolor sit amet.',
 				values: [{
 					value: 's',
-					text: '<i>Маленький</i>',
+					text: 'Маленький',
 					img: 's{type}'
 				}, {
 					value: 'm',
@@ -92,6 +91,12 @@
 						required: true
 					}
 				}]
+			}, {
+				id: 'image',
+				type: 'image',
+				img: 's{type}_{fields.name}',
+				title: '',
+				description: '',
 			}],
 			debug: {
 				logUpdates: true,

@@ -70,6 +70,28 @@ interface IKonstructSelectBlock extends IKonstructCommonBlock {
     }>
 }
 
+interface IKonstructImageBlock extends IKonstructCommonBlock {
+    /**
+     * Блок изображения
+     */
+    type: 'image';
+    /**
+     * Изображение, которое будет выведено в блоке при выборе варианта  
+     * Если не указано, то изображения не будет  
+     * 
+     * Поддерживаются значения из других блоков  
+     * Например если необходимо использовать значение блока c id type,  
+     * то внутри пути к изобраению можно использовать переменную `{type}` вот так:  
+     * `/path/to/my/img/picture_{type}.jpg`  
+     * Тогда при значении type=main путь будет `/path/to/my/img/picture_main.jpg`
+     */
+    img: string;
+    /**
+     * HTML атрибуты изображения (alt, etc.)
+     */
+    attributes?: Partial<HTMLImageElement>;
+}
+
 interface IKonstructFieldsBlock extends IKonstructCommonBlock {
     /**
      * Блок полей ввода
@@ -92,7 +114,7 @@ interface IKonstructFieldsBlock extends IKonstructCommonBlock {
         /**
          * HTML атрибуты поля ввода (placeholder, autocomplete, etc.)
          */
-        attributes: Partial<HTMLInputElement>;
+        attributes?: Partial<HTMLInputElement>;
     }>;
 }
 
@@ -127,7 +149,7 @@ interface IConfig {
     /**
      * Определения блоков
      */
-    blocks: Array<IKonstructSelectBlock | IKonstructFieldsBlock>;
+    blocks: Array<IKonstructSelectBlock | IKonstructFieldsBlock | IKonstructImageBlock>;
     /**
      * Опции для отладки
      */
@@ -213,6 +235,12 @@ const config: IConfig = {
                 required: true
             }
         }]
+    }, {
+        id: 'image',
+        type: 'image',
+        img: 's{type}_{fields.name}',
+        title: '',
+        description: '',
     }],
     debug: {
         logUpdates: true,
