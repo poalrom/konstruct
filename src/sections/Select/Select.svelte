@@ -9,7 +9,7 @@
   $: currentValue = block.values.find(value => value.value === $storedValue);
 </script>
 
-<div class="Select">
+<div class="Select" data-id={block.id}>
 
   <h2 class="Select-Title">
     {@html block.title}

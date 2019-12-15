@@ -159,6 +159,7 @@ interface IConfig {
 const config: IConfig = {
     action: '/send',
     saveButtonText: 'Save',
+    onSubmit: console.log,
     blocks: [{
         id: 'type',
         type: 'select',

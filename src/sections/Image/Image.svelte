@@ -1,9 +1,9 @@
 <script>
-  import { prepareImage } from "../utils/prepareImage";
+  import { prepareImage } from "../../utils/prepareImage";
 
   export let block;
 
-  const imagePath = prepareImage(block.img);
+  $: imagePath = prepareImage(block.img);
 </script>
 
 <div class="Image">
@@ -19,6 +19,7 @@
   <img
     src={imagePath}
     class="Select-Image"
-    alt={block.alt || imagePath} />
+    alt={block.alt || imagePath}
+    {...block.attributes} />
 
 </div>

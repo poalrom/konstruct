@@ -15,68 +15,98 @@
 		const konstructConfig = {
 			action: '/send',
 			saveButtonText: 'Save',
+			onSubmit: console.log,
 			blocks: [{
 				id: 'type',
 				type: 'select',
 				title: 'Выберите тип',
 				description: 'Lorem ipsum dolor sit amet.',
 				values: [{
-					value: 'al',
-					text: 'Алюминиевые',
-					img: 'al'
-				}, {
-					value: 'raz',
-					text: 'Раздвижные',
+					value: 'Shift',
+					text: 'Shift',
 					img: 'raz'
 				}, {
-					value: 'cs',
-					text: 'Цельностеклянные',
-					img: 'cs'
+					value: 'Framewall',
+					text: 'Framewall',
 				}, {
-					value: 'af',
-					text: 'Противопожарные',
-					img: 'af'
+					value: 'Chisel',
+					text: 'Chisel'
+				}]
+			}, {
+				id: 'width',
+				conditions: [{
+					id: 'type',
+					value: 'Framewall'
+				}],
+				type: 'select',
+				title: 'CHOOSE A WIDTH',
+				values: [{
+					value: 52,
+					text: 'Framewall 52'
+				}, {
+					value: 76,
+					text: 'Framewall 76'
 				}]
 			}, {
 				id: 'size',
-				type: 'select',
-				title: 'Выберите размер',
+				type: 'fields',
+				title: 'Размер',
 				description: 'Lorem ipsum dolor sit amet.',
-				values: [{
-					value: 's',
-					text: 'Маленький',
-					img: 's{type}'
+				fields: [{
+					id: 'width',
+					title: 'Ширина',
+					attributes: {
+						type: 'number',
+						required: true
+					}
 				}, {
-					value: 'm',
-					text: 'Средний',
-					img: 'm'
-				}, {
-					value: 'l',
-					text: 'Большой',
-					img: 'l'
-				}, {
-					value: 'xz',
-					text: 'Непонятный',
-					img: 'xz'
+					id: 'height',
+					title: 'Высота',
+					attributes: {
+						type: 'number',
+						required: true,
+					}
 				}]
 			}, {
-				id: 'def',
-				type: 'select',
-				title: 'Выберите степень защиты',
-				description: 'Lorem ipsum dolor sit amet.',
+				id: 'height',
 				conditions: [{
 					id: 'type',
-					value: 'af'
+					value: 'Framewall'
 				}],
+				type: 'select',
+				title: 'CHOOSE A HEIGHT',
 				values: [{
-					value: 15,
+					value: 53,
+					text: 'Framewall 53'
 				}, {
-					value: 30,
-				}, {
-					value: 45,
-				}, {
-					value: 60,
+					value: 78,
+					text: 'Framewall 78'
 				}]
+			}, {
+				id: 'style',
+				conditions: [{
+					id: 'type',
+					value: 'Framewall'
+				}],
+				type: 'select',
+				title: 'Style',
+				values: [{
+					value: 1,
+				}, {
+					value: 2,
+				}, {
+					value: 3,
+				}]
+			}, {
+				id: 'image',
+				conditions: [{
+					id: 'type',
+					value: 'Framewall'
+				}],
+				type: 'image',
+				img: '{type}_{width}_{height}_{style}_{size.height}.jpg',
+				title: '',
+				description: '',
 			}, {
 				id: 'contacts',
 				type: 'fields',
@@ -90,13 +120,16 @@
 						placeholder: 'Ваня',
 						required: true
 					}
+				}, {
+					id: 'phone',
+					title: 'Телефон',
+					attributes: {
+						type: 'tel',
+						placeholder: '+79999999999',
+						required: true,
+						mask: '+79999999999'
+					}
 				}]
-			}, {
-				id: 'image',
-				type: 'image',
-				img: 's{type}_{fields.name}',
-				title: '',
-				description: '',
 			}],
 			debug: {
 				logUpdates: true,
