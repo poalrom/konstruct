@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+
+	<title>Svelte app</title>
+
+	<link rel='icon' type='image/png' href='/favicon.png'>
+	<link rel='stylesheet' href='/global.css'>
+	<link rel='stylesheet' href='/build/bundle.css'>
+
+	<script>
+		const konstructConfig = {
+			action: '/send',
+			saveButtonText: 'Save',
+			blocks: [{
+				id: 'type',
+				type: 'select',
+				title: 'Выберите тип',
+				description: 'Lorem ipsum dolor sit amet.',
+				values: [{
+					value: 'al',
+					text: 'Алюминиевые',
+					img: 'al'
+				}, {
+					value: 'raz',
+					text: 'Раздвижные',
+					img: 'raz'
+				}, {
+					value: 'cs',
+					text: 'Цельностеклянные',
+					img: 'cs'
+				}, {
+					value: 'af',
+					text: 'Противопожарные',
+					img: 'af'
+				}]
+			}, {
+				id: 'size',
+				type: 'select',
+				title: 'Выберите размер',
+				description: 'Lorem ipsum dolor sit amet.',
+				values: [{
+					value: 's',
+					text: 'Маленький',
+					img: 's{type}'
+				}, {
+					value: 'm',
+					text: 'Средний',
+					img: 'm'
+				}, {
+					value: 'l',
+					text: 'Большой',
+					img: 'l'
+				}, {
+					value: 'xz',
+					text: 'Непонятный',
+					img: 'xz'
+				}]
+			}, {
+				id: 'def',
+				type: 'select',
+				title: 'Выберите степень защиты',
+				description: 'Lorem ipsum dolor sit amet.',
+				conditions: [{
+					id: 'type',
+					value: 'af'
+				}],
+				values: [{
+					value: 15,
+				}, {
+					value: 30,
+				}, {
+					value: 45,
+				}, {
+					value: 60,
+				}]
+			}, {
+				id: 'contacts',
+				type: 'fields',
+				title: 'Контакты',
+				description: 'Lorem ipsum dolor sit amet.',
+				fields: [{
+					id: 'name',
+					title: 'Имя',
+					attributes: {
+						type: 'text',
+						placeholder: 'Ваня',
+						required: true
+					}
+				}]
+			}],
+			debug: {
+				logUpdates: true,
+				placeholdImages: true,
+			}
+		};
+	</script>
+
+	<script src='/build/bundle.js'></script>
+</head>
+
+<body>
+	<div class="konstruct"></div>
+	<script>
+		window.konstruct.render('.konstruct', konstructConfig);
+	</script>
+</body>
+
+</html>
