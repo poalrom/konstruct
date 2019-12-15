@@ -104,7 +104,7 @@
 					value: 'Framewall'
 				}],
 				type: 'image',
-				img: '{type}_{width}_{height}_{style}_{size.height}.jpg',
+				img: '/qwe/{type}_{width}_{height}_{style}_{size.height}.jpg',
 				title: '',
 				description: '',
 			}, {
@@ -114,15 +114,16 @@
 				description: 'Lorem ipsum dolor sit amet.',
 				fields: [{
 					id: 'name',
-					title: 'Имя',
+					title: 'Имя {type}',
 					attributes: {
 						type: 'text',
 						placeholder: 'Ваня',
-						required: true
+						required: true,
+						value: 1
 					}
 				}, {
 					id: 'phone',
-					title: 'Телефон',
+					title: 'Телефон {contacts.name}',
 					attributes: {
 						type: 'tel',
 						placeholder: '+79999999999',

@@ -2,6 +2,7 @@
   import { store } from "../../store";
   import SelectValue from "./SelectValue.svelte";
   import { prepareImage } from "../../utils/prepareImage";
+  import { template } from "../../utils/template";
 
   export let block;
 
@@ -11,13 +12,17 @@
 
 <div class="Select" data-id={block.id}>
 
-  <h2 class="Select-Title">
-    {@html block.title}
-  </h2>
+  {#if block.title}
+    <h2 class="Select-Title">
+      {@html block.title}
+    </h2>
+  {/if}
 
-  <p class="Select-Description">
-    {@html block.description}
-  </p>
+  {#if block.description}
+    <p class="Select-Description">
+      {@html template(block.description)}
+    </p>
+  {/if}
 
   <input type="hidden" value={$storedValue} name={block.title + block.id} />
 

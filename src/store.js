@@ -9,12 +9,16 @@ export function initStore(config, onUpdate) {
         if (block.type === 'select') {
             acc[block.id] = writable(block.values[0].value);
             acc[block.id].subscribe(onUpdate);
+            if (config.debug && config.debug.logUpdates) {
+                acc[block.id].subscribe((value) => console.log(block.id + ': ' + value));
+            }
         }
 
         if (block.type === 'fields') {
             block.fields.forEach((field) => {
                 const id = block.id + '.' + field.id;
-                acc[id] = writable('');
+                console.log(id);
+                acc[id] = writable(block.attributes && block.attributes.value || '');
                 acc[id].subscribe(onUpdate);
                 if (config.debug && config.debug.logUpdates) {
                     acc[id].subscribe((value) => console.log(id + ': ' + value));

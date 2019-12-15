@@ -1,5 +1,6 @@
 <script>
   import { prepareImage } from "../../utils/prepareImage";
+  import { template } from "../../utils/template";
 
   export let block;
 
@@ -8,13 +9,17 @@
 
 <div class="Image">
 
-  <h2 class="Image-Title">
-    {@html block.title}
-  </h2>
+  {#if block.title}
+    <h2 class="Image-Title">
+      {@html block.title}
+    </h2>
+  {/if}
 
-  <p class="Image-Description">
-    {@html block.description}
-  </p>
+  {#if block.description}
+    <p class="Image-Description">
+      {@html template(block.description)}
+    </p>
+  {/if}
 
   <img
     src={imagePath}
