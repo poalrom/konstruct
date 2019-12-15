@@ -1,8 +1,8 @@
 <script>
   import { get } from "svelte/store";
   import { initStore, store } from "./store";
-  import Select from "./Select/Select.svelte";
-  import Fields from "./Fields/Fields.svelte";
+  import Select from "./sections/Select/Select.svelte";
+  import Fields from "./sections/Fields/Fields.svelte";
 
   export let config;
 

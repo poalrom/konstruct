@@ -1,5 +1,5 @@
 <script>
-  import { store } from "../store";
+  import { store } from "../../store";
   export let blockId, field;
 
   const name = `${blockId}-${field.id}`;
