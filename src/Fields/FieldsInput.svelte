@@ -11,7 +11,7 @@
 </script>
 
 <div class="Fields-Input">
-  <label for="name" class="Fields-InputLabel">{field.title}</label>
+  <label for="name" class="Fields-InputLabel">{@html field.title}</label>
   <input
     {...field.attributes}
     class="Fields-InputField"

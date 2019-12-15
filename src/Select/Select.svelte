@@ -31,11 +31,11 @@
 
 <div class="Select">
 
-  <h2 class="Select-Title">{block.title}</h2>
+  <h2 class="Select-Title">{@html block.title}</h2>
 
-  <p class="Select-Description">{block.description}</p>
+  <p class="Select-Description">{@html block.description}</p>
 
-  <input type="hidden" value={$storedValue} name={block.title} />
+  <input type="hidden" value={$storedValue} name={block.title + block.id} />
 
   {#each block.values as value}
     <SelectValue {value} id={block.id} />

@@ -16,5 +16,5 @@
   class:active
   data-value={value.value}
   on:click={setValue(value.value)}>
-  {value.text || value.value}
+  {@html value.text || value.value}
 </div>

@@ -4,8 +4,8 @@
 </script>
 
 <div class="Contacts">
-  <h2 class="Contacts-Header">{block.title}</h2>
-  <p class="Contacts-Description">{block.description}</p>
+  <h2 class="Contacts-Header">{@html block.title}</h2>
+  <p class="Contacts-Description">{@html block.description}</p>
   {#each block.fields as field} 
        <FieldsInput blockId={block.id} {field} />
   {/each}
