@@ -9,12 +9,14 @@
   initStore(config, setVisibleBlocks);
 
   function submit(e) {
-    e.preventDefault();
+    if (config.onSubmit) {
+      e.preventDefault();
 
-    if (this.checkValidity()) {
-      console.log(store.getValues(visibleBlocks));
-    } else {
-      this.reportValidity();
+      if (this.checkValidity()) {
+        config.onSubmit(store.getValues(visibleBlocks));
+      } else {
+        this.reportValidity();
+      }
     }
   }
 

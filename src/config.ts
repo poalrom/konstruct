@@ -116,6 +116,11 @@ interface IConfig {
      */
     action: string;
     /**
+     * Колбек, который будет выполняться при отправке формы  
+     * Если он объявлен, то стандартная отправка формы производиться не будет
+     */
+    onSubmit?: (values: Record<string, string>) => void;
+    /**
      * Текст кнопки сохранения
      */
     saveButtonText: string;
