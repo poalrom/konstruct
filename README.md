@@ -1,93 +1,135 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Konstruct - конструктор конструкторов
 
----
+Виджет для создания конструкторов с обширными возможностями.
 
-# svelte app
+## Подключение
+Собранный скрипт последней версии всегда находится по пути
+`https://github.com/poalrom/konstruct/blob/gh-pages/build/bundle.js`
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+Можно подключить напрямую с github
+```html
+<script src='https://raw.githubusercontent.com/poalrom/konstruct/gh-pages/build/bundle.js'></script>
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+## Отображение
 
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-npm run dev
-```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+Для отображения необходимо вызвать функцию render, передав в нее селектор элемента, в который нужно встроить конструктор и настройки конструктора.
 
 ```js
-"start": "sirv public --single"
+window.konstruct.render('.konstruct', konstructConfig);
 ```
 
+## Настройки
 
-## Deploying to the web
+Настройки содержат несколько основных полей:
+- `action` - значение атрибута action основного тега form
+- `saveButtonText` - текст кнопки сохранения конструктора
+- `onSubmit` - обработчик сохранения конструктора
+- `blocks` - описание блоков конструктора
+- `debug` - опции для отладки
 
-### With [now](https://zeit.co/now)
+### Обработчик сохранения
+Функция принимает на вход объект, где ключами являются заголовки блоков, а значениями - выбранные параметры.  
+Для блоков с текстовыми полями в значении находится объект с ключам-заголовками полей и значениями этих полей.
 
-Install `now` if you haven't already:
+### Блоки конструктора
 
-```bash
-npm install -g now
+Блок - один этап конструктора. Бывает разных типов. Имеет общие поля:
+```js
+{
+    // Уникальный идентификатор среди всех блоков
+    id: 'width',
+    // Массив условий, при которых этот блок будет отображаться
+    // Может быть несколько условий, они объединяются через логическое "И"
+    // Если хотя бы одно условие не выполняется, блока нет в DOM
+    conditions: [{
+        // Идентификатор блока, значение для которого нужно проверять
+        id: 'type',
+        // Значение блока с указанным идентификатором, при котором этот блок будет виден
+        value: 'Framewall'
+    }],
+    // Тип блока
+    type: 'select',
+    // Заголовок блока. Поддерживает HTML, отображается в теге <h2> в начале блока
+    title: 'CHOOSE A WIDTH',
+    // Описание блока. Поддерживает HTML и шаблоны, отображается в теге <p> под заголовком
+    description: 'Lorem ipsum dolor sit amet.',
+}
 ```
 
-Then, from within your project folder:
-
-```bash
-cd public
-now deploy --name my-project
+#### Блок type select
+Блок выбора одного из вариантов. Может отображать картинку выбранного варианта. 
+Имеет поле values, где указываются варианты для выбора:
+```js
+{
+    // Массив значений выбора
+    values: [{
+        // Значение, должно быть уникально внутри одного блока
+        // Используется для conditions
+        value: 'Shift',
+        // Текст варианта. Отображается внутри блока выбора, поддерживает HTML
+        // Если отсутствует, то отображается value
+        text: 'Shift',
+        // Путь до изображения. Поддерживает шаблоны
+        // Если отсутствует, то при выборе варианта изображение не будет отображаться
+        img: 'raz'
+    }, {
+        value: 'Framewall',
+        text: 'Framewall',
+    }, {
+        value: 'Chisel',
+        text: 'Chisel'
+    }]
+}
 ```
 
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
+#### Блок type fields
+Блок текстовых полей ввода. Всё, что можно отобразить в качестве input, можно сделать через этот блок. 
+Имеет поле fields, описывающее поля ввода:
+```js
+{
+    // Список полей ввода
+    fields: [{
+        // Уникальный идентификатор всреди этого блока полей ввода
+        id: 'width',
+        // Название поля. Отображается в теге <label> над полем ввода, поддерживает HTML
+        title: 'Ширина',
+        // Атрибуты, которые пробросятся напрямую в тег input
+        attributes: {
+            type: 'number',
+            required: true,
+            value: 3
+        }
+    }, {
+        id: 'height',
+        title: 'Высота',
+        attributes: {
+            type: 'number',
+            required: true,
+        }
+    }]
+}
 ```
 
-Then, from within your project folder:
+#### Блок type image
+Блок отображения картинки. Отлично подходит для отображения финального результата работы конструктора. 
+Имеет поле img, которое принимает путь изображения. Поддерживает шаблоны
 
-```bash
-npm run build
-surge public my-project.surge.sh
+#### Шаблоны
+Во все строки, которые поддерживают шаблоны, можно вставлять значения других блоков. Пример:
+```js
+{
+    //...
+    img: "/images/{type}/{contacts.city}/result.jpg",
+    //...
+}
 ```
+В этом примере на место `{type}` подставится значение блока с идентификатором `type`, а на место `{contacts.city}` - значение поля `city` блока списка полей с идентификатором `contacts`.
+
+Для уточнения:
+- `{id}` - вставить значение блока типа `select` с идентификатором `id`
+- `{blockId.fieldId}` - найти блок с типом `fields` и идентификатором `blockId` и получить значение поля с идентификатором `fieldId` и вставить его на это место
+
+### Опции отладки
+- `logUpdates` - флаг логгирования изменений значений в реальном времени. Нужен, если где-то что-то не прорастает
+- `placeholdImages` - флаг заменяет все изображения в блоках на заглушки с текстом пути, который для них формируется
