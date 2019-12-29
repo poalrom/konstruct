@@ -27,10 +27,10 @@
   <input type="hidden" value={$storedValue} name={block.title + block.id} />
 
   {#each block.values as value}
-    <SelectValue {value} id={block.id} />
+    <SelectValue {value} id={block.id} showImage={block.showImages} />
   {/each}
 
-  {#if currentValue && currentValue.img}
+  {#if !block.showImages && currentValue && currentValue.img}
     <img
       src={prepareImage(currentValue.img)}
       class="Select-Image"

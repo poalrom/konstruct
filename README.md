@@ -79,7 +79,10 @@ window.konstruct.render('.konstruct', konstructConfig);
     }, {
         value: 'Chisel',
         text: 'Chisel'
-    }]
+    }],
+    // Флаг, при установке которого убирается изображение финального результата,
+    // а у каждого варианта появляется собственное изображение
+    showImages: true,
 }
 ```
 
