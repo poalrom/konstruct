@@ -19,6 +19,16 @@
     flex: 45px;
 }
 
+.Konstruct button {
+    background: #0ABC45;
+    font-size: 24px;
+    line-height: 1;
+    color: #fff;
+    padding: 20px 40px;
+    border: none;
+    cursor: pointer;
+}
+
 
 /* Общее описание блоков */
 
@@ -90,16 +100,7 @@
 .Submit {
     width: 100%;
     text-align: center;
-}
-
-.Submit-Button {
-    background: #0ABC45;
-    font-size: 24px;
-    line-height: 1;
-    color: #fff;
-    padding: 20px 40px;
-    border: none;
-    cursor: pointer;
+    align-self: center;
 }
 
 

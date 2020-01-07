@@ -25,10 +25,10 @@
 
   $: visibleBlocks = [];
 
-  function onUpdate(block) {
+  function onUpdate(block, path) {
     return () => {
       setVisibleBlocks();
-      dispatch('update', { blockId: block.id, blockType: block.type });
+      dispatch('update', { blockId: block.id, blockType: block.type, path });
     }
   }
 
@@ -66,7 +66,7 @@
       <Select {block} />
     {/if}
     {#if block.type === 'fields'}
-      <Fields {block} />
+      <Fields {block} on:update={onUpdate(block)} />
     {/if}
     {#if block.type === 'image'}
       <Image {block} />

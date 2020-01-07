@@ -1,7 +1,10 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import FieldsInput from "./FieldsInput.svelte";
   import { template } from "../../utils/template";
-  
+
+  const dispatch = createEventDispatcher();
+
   export let block;
 </script>
 
@@ -21,4 +24,8 @@
   {#each block.fields as field}
     <FieldsInput blockId={block.id} {field} />
   {/each}
+
+  {#if block.nextStepButtonText}
+    <button type="button" class="Fields-NextStepButton" on:click={() => dispatch('update')}>{block.nextStepButtonText}</button>
+  {/if}
 </div>
