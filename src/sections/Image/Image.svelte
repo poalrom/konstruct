@@ -23,7 +23,7 @@
 
   <img
     src={imagePath}
-    class="Select-Image"
+    class="Image-Pic"
     alt={block.alt || imagePath}
     {...block.attributes} />
 

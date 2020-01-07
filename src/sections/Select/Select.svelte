@@ -24,7 +24,7 @@
     </p>
   {/if}
 
-  <input type="hidden" value={$storedValue} name={block.title + block.id} />
+  <input type="hidden" value={$storedValue} name={block.title} />
 
   {#each block.values as value}
     <SelectValue {value} id={block.id} showImage={block.showImages} />
