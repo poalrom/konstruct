@@ -25,10 +25,10 @@
 
   $: visibleBlocks = [];
 
-  function onUpdate(block, path) {
+  function onUpdate(block) {
     return () => {
       setVisibleBlocks();
-      dispatch('update', { blockId: block.id, blockType: block.type, path });
+      dispatch('update', { blockId: block.id, blockType: block.type });
     }
   }
 
