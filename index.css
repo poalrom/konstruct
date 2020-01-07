@@ -103,6 +103,10 @@
     align-self: center;
 }
 
+[data-id=type] .Select-Value {
+    width: 23%;
+}
+
 
 /* Блок уровня защиты */
 
@@ -192,10 +196,14 @@
         width: 100%;
         min-height: 40vh;
     }
+    [data-id=type] .Select-Value {
+        width: 45%;
+    }
 }
 
 @media screen and (max-width: 425px) {
-    .Select-Value {
+    .Select-Value,
+    [data-id=type] .Select-Value {
         width: 90%;
     }
 }
