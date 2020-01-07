@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { get } from "svelte/store";
   import { initStore, store } from "./store";
   import Select from "./sections/Select/Select.svelte";
@@ -7,7 +8,7 @@
 
   export let config;
 
-  initStore(config, setVisibleBlocks);
+  initStore(config, onUpdate);
 
   function submit(e) {
     if (config.onSubmit) {
@@ -21,7 +22,11 @@
     }
   }
 
-  let visibleBlocks = [];
+  $: visibleBlocks = [];
+
+  function onUpdate() {
+    setVisibleBlocks();
+  }
 
   function setVisibleBlocks() {
     if (!store) {
@@ -41,11 +46,13 @@
     });
   }
 
-  setVisibleBlocks();
+  onMount(function(){
+    setVisibleBlocks();
+  })
 </script>
 
-<form action={config.action} method="POST" on:submit={submit}>
-  {#each visibleBlocks as block}
+<form action={config.action} method="POST" on:submit={submit} class="Konstruct">
+  {#each visibleBlocks as block (block.id)}
     {#if block.type === 'select'}
       <Select {block} />
     {/if}
@@ -57,7 +64,9 @@
     {/if}
   {/each}
 
-  <button type="submit" class="SubmitButton">
-    {config.saveButtonText || ''}
-  </button>
+  <div class="Submit">
+    <button type="submit" class="Submit-Button">
+      {config.saveButtonText || ''}
+    </button>
+  </div>
 </form>
