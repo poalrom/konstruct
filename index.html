@@ -2,153 +2,179 @@
 <html lang="en">
 
 <head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>Konstruct demo app</title>
+    <title>Konstruct demo app</title>
 
-	<link rel='icon' type='image/png' href='./favicon.png'>
-	<link rel='stylesheet' href='./global.css'>
-	<link rel='stylesheet' href='./build/bundle.css'>
-
-	<script>
-		const konstructConfig = {
-			action: '/send',
-			saveButtonText: 'Save',
-			onSubmit: console.log,
-			blocks: [{
-				id: 'type',
-				type: 'select',
-				title: 'Выберите тип',
-				description: 'Lorem ipsum dolor sit amet.',
-				showImages: true,
-				values: [{
-					value: 'Shift',
-					text: 'Shift',
-					img: 'raz'
-				}, {
-					value: 'Framewall',
-					text: 'Framewall',
-				}, {
-					value: 'Chisel',
-					text: 'Chisel'
-				}]
-			}, {
-				id: 'width',
-				conditions: [{
-					id: 'type',
-					value: 'Framewall'
-				}],
-				type: 'select',
-				title: 'CHOOSE A WIDTH',
-				values: [{
-					value: 52,
-					text: 'Framewall 52'
-				}, {
-					value: 76,
-					text: 'Framewall 76'
-				}]
-			}, {
-				id: 'size',
-				type: 'fields',
-				title: 'Размер',
-				description: 'Lorem ipsum dolor sit amet.',
-				fields: [{
-					id: 'width',
-					title: 'Ширина',
-					attributes: {
-						type: 'number',
-						required: true,
-						value: 3
-					}
-				}, {
-					id: 'height',
-					title: 'Высота',
-					attributes: {
-						type: 'number',
-						required: true,
-					}
-				}]
-			}, {
-				id: 'height',
-				conditions: [{
-					id: 'type',
-					value: 'Framewall'
-				}],
-				type: 'select',
-				title: 'CHOOSE A HEIGHT',
-				values: [{
-					value: 53,
-					text: 'Framewall 53'
-				}, {
-					value: 78,
-					text: 'Framewall 78'
-				}]
-			}, {
-				id: 'style',
-				conditions: [{
-					id: 'type',
-					value: 'Framewall'
-				}],
-				type: 'select',
-				title: 'Style',
-				values: [{
-					value: 1,
-				}, {
-					value: 2,
-				}, {
-					value: 3,
-				}]
-			}, {
-				id: 'image',
-				conditions: [{
-					id: 'type',
-					value: 'Framewall'
-				}],
-				type: 'image',
-				img: '/qwe/{type}_{width}_{height}_{style}_{size.height}.jpg',
-				title: '',
-				description: '',
-			}, {
-				id: 'contacts',
-				type: 'fields',
-				title: 'Контакты',
-				description: 'Lorem ipsum dolor sit amet.',
-				fields: [{
-					id: 'name',
-					title: 'Имя {type}',
-					attributes: {
-						type: 'text',
-						placeholder: 'Ваня',
-						required: true,
-						value: 1
-					}
-				}, {
-					id: 'phone',
-					title: 'Телефон {contacts.name}',
-					attributes: {
-						type: 'tel',
-						placeholder: '+79999999999',
-						required: true,
-						mask: '+79999999999'
-					}
-				}]
-			}],
-			debug: {
-				logUpdates: true,
-				placeholdImages: true,
-			}
-		};
-	</script>
-
-	<script src='./build/bundle.js'></script>
+    <link rel='icon' type='image/png' href='./favicon.png'>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel='stylesheet' href='./index.css'>
 </head>
 
 <body>
-	<div class="konstruct"></div>
-	<script>
-		window.konstruct.render('.konstruct', konstructConfig);
-	</script>
+    <div class="konstruct"></div>
+    <script src='./build/bundle.js'></script>
+    <script>
+        const konstructConfig = {
+            action: '#',
+            saveButtonText: 'Отправить',
+            onSubmit: console.log,
+            blocks: [{
+                id: 'type',
+                type: 'select',
+                title: 'Тип конструкции',
+                values: [{
+                    value: 'aluminum',
+                    text: 'Алюминиевые',
+                    img: './aluminum.jpg',
+                }, {
+                    value: 'sliding',
+                    text: 'Раздвижные',
+                    img: './sliding.jpg',
+                }, {
+                    value: 'glass',
+                    text: 'Цельностеклянные',
+                    img: './glass.jpg',
+                }, {
+                    value: 'fireproof',
+                    text: 'Противопожарные',
+                    img: './fireproof.jpg',
+                }],
+                showImages: true,
+            }, {
+                id: 'size',
+                type: 'fields',
+                title: 'Размеры',
+                description: 'в миллиметрах',
+                fields: [{
+                    id: 'width',
+                    title: 'Ширина',
+                    attributes: {
+                        type: 'number',
+                        required: true,
+                        placeholder: '1200*'
+                    }
+                }, {
+                    id: 'height',
+                    title: 'Высота',
+                    attributes: {
+                        type: 'number',
+                        required: true,
+                        placeholder: '800*'
+                    }
+                }]
+            }, {
+                id: 'width_image',
+                type: 'image',
+                img: './width.jpg'
+            }, {
+                id: 'fireproof',
+                type: 'select',
+                title: 'Уровень защиты',
+                conditions: [{
+                    id: 'type',
+                    value: 'fireproof'
+                }],
+                values: [{
+                    value: '15',
+                    text: '15 минут',
+                }, {
+                    value: '30',
+                    text: '30 минут',
+                }, {
+                    value: '45',
+                    text: '45 минут',
+                }, {
+                    value: '60',
+                    text: '60 минут',
+                }],
+            }, {
+                id: 'color',
+                type: 'select',
+                title: 'Цвет',
+                values: [{
+                    value: 'blue',
+                    text: 'Синий',
+                    img: './blue_{type}.jpg',
+                }, {
+                    value: 'green',
+                    text: 'Зеленый',
+                    img: './green_{type}.jpg',
+                }, {
+                    value: 'red',
+                    text: 'Красный',
+                    img: './red_{type}.jpg',
+                }],
+                showImages: true,
+            }, {
+                id: 'contacts',
+                type: 'fields',
+                title: 'Контакты',
+                fields: [{
+                    id: 'name',
+                    title: 'Имя',
+                    attributes: {
+                        type: 'text',
+                        required: true,
+                        placeholder: 'Владимир*'
+                    }
+                }, {
+                    id: 'phone',
+                    title: 'Телефон',
+                    attributes: {
+                        type: 'tel',
+                        required: true,
+                        placeholder: '+79999051234*'
+                    }
+                }, {
+                    id: 'mail',
+                    title: 'Email',
+                    attributes: {
+                        type: 'email',
+                        required: true,
+                        placeholder: 'vladimir@mail.ru*'
+                    }
+                }]
+            }, {
+                id: 'result_image',
+                type: 'image',
+                img: './{color}_{type}.jpg'
+            }],
+            debug: {
+                placeholdImages: true,
+            },
+        };
+
+        function scrollToNextStep(blockId) {
+            const currentSection = document.querySelector('[data-id=' + blockId + ']');
+
+            if (!currentSection) {
+                return;
+            }
+
+            let nextSection = currentSection;
+
+            while (nextSection.nextElementSibling) {
+                nextSection = nextSection.nextElementSibling;
+                if (nextSection.classList.contains('Select') ||
+                    nextSection.classList.contains('Fields')) {
+                    nextSection.scrollIntoView();
+                    break;
+                }
+            }
+        }
+
+        window.addEventListener('update', (e) => {
+            console.log(e);
+            if (!e.detail || !e.detail.blockId || e.detail.blockType !== 'select') {
+                return;
+            }
+
+            scrollToNextStep(e.detail.blockId);
+        });
+        window.konstruct.render('.konstruct', konstructConfig);
+    </script>
 </body>
 
 </html>
