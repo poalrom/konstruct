@@ -47,6 +47,7 @@
                 type: 'fields',
                 title: 'Размеры',
                 description: 'в миллиметрах',
+                nextStepButtonText: 'Далее',
                 fields: [{
                     id: 'width',
                     title: 'Ширина',
@@ -167,7 +168,7 @@
 
         window.addEventListener('update', (e) => {
             console.log(e);
-            if (!e.detail || !e.detail.blockId || e.detail.blockType !== 'select') {
+            if (!e.detail || !e.detail.blockId || e.detail.path) {
                 return;
             }
 
