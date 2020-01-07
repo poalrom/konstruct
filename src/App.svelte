@@ -7,6 +7,7 @@
   import Image from "./sections/Image/Image.svelte";
 
   export let config;
+  let konstuct;
 
   initStore(config, onUpdate);
 
@@ -24,8 +25,11 @@
 
   $: visibleBlocks = [];
 
-  function onUpdate() {
-    setVisibleBlocks();
+  function onUpdate(block, path) {
+    return () => {
+      setVisibleBlocks();
+      dispatch('update', { blockId: block.id, blockType: block.type, path });
+    }
   }
 
   function setVisibleBlocks() {
@@ -46,12 +50,17 @@
     });
   }
 
+  function dispatch(name, detail = {}) {
+    konstuct && konstuct.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+  }
+
   onMount(function(){
     setVisibleBlocks();
+    dispatch('init');
   })
 </script>
 
-<form action={config.action} method="POST" on:submit={submit} class="Konstruct">
+<form action={config.action} method="POST" on:submit={submit} class="Konstruct" bind:this={konstuct}>
   {#each visibleBlocks as block (block.id)}
     {#if block.type === 'select'}
       <Select {block} />

@@ -8,7 +8,7 @@ export function initStore(config, onUpdate) {
     store = config.blocks.reduce((acc, block) => {
         if (block.type === 'select') {
             acc[block.id] = writable(block.values[0].value);
-            acc[block.id].subscribe(onUpdate);
+            acc[block.id].subscribe(onUpdate(block));
             if (config.debug && config.debug.logUpdates) {
                 acc[block.id].subscribe((value) => console.log(block.id + ': ' + value));
             }
@@ -18,7 +18,7 @@ export function initStore(config, onUpdate) {
             block.fields.forEach((field) => {
                 const id = block.id + '.' + field.id;
                 acc[id] = writable(field.attributes && field.attributes.value || '');
-                acc[id].subscribe(onUpdate);
+                acc[id].subscribe(onUpdate(block, id));
                 if (config.debug && config.debug.logUpdates) {
                     acc[id].subscribe((value) => console.log(id + ': ' + value));
                 }
@@ -30,7 +30,7 @@ export function initStore(config, onUpdate) {
 
     store[debug] = config.debug || {};
 
-    store.getValues = function (visibleBlocks) {
+    store.getValues = function(visibleBlocks) {
         return visibleBlocks.reduce((acc, block) => {
             if (block.type === 'select') {
                 const storedValue = get(store[block.id]);
