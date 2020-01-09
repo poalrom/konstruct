@@ -23,6 +23,7 @@
     </section>
     <main class="konstruct"></main>
     <script src='./build/bundle.js'></script>
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
     <script>
         const konstructConfig = {
             action: '#',
@@ -155,6 +156,8 @@
             },
         };
 
+        var scroll = new SmoothScroll();
+
         function scrollToNextStep(blockId) {
             const currentSection = document.querySelector('[data-id=' + blockId + ']');
 
@@ -168,7 +171,7 @@
                 nextSection = nextSection.nextElementSibling;
                 if (nextSection.classList.contains('Select') ||
                     nextSection.classList.contains('Fields')) {
-                    nextSection.scrollIntoView();
+                    scroll.animateScroll(nextSection);
                     break;
                 }
             }
